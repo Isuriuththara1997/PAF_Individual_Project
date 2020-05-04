@@ -33,7 +33,7 @@
 				<div id="divPatientsGrid">
 					<%
 						Patient patientObj = new Patient();
-					out.print(patientObj.readPatient());
+					    out.print(patientObj.readPatients());
 					%>
 				</div>
 			</div>

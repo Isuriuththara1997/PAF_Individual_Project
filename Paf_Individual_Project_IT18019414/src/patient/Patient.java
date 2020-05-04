@@ -23,7 +23,7 @@ public class Patient {
 
 
 
-	public String readPatient()
+	public String readPatients()
 	{
 		String output = "";
 		
@@ -88,20 +88,24 @@ public class Patient {
 					+ " values (?, ?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
-			preparedStmt.setInt(1, 0);
-			preparedStmt.setString(2, name);
-			preparedStmt.setString(3, address);
-			preparedStmt.setInt(4, Integer.parseInt(phone));
-			preparedStmt.setString(5, NIC);
+			
+			  preparedStmt.setInt(1, 0); 
+			  preparedStmt.setString(2, name);
+			  preparedStmt.setString(3, address); 
+			  preparedStmt.setInt(4,Integer.parseInt(phone)); 
+			  preparedStmt.setString(5, NIC);
+			 
+			
+			
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
 			
 			//output = "Inserted successfully";
 			
-			String newPatient = readPatient();
+			String newPatients = readPatients();
 			 output = "{\"status\":\"success\", \"data\": \"" +
-					 newPatient + "\"}"; 
+					 newPatients + "\"}"; 
 			 
 			 
 		} catch (Exception e) {
@@ -132,7 +136,7 @@ public class Patient {
 			preparedStmt.execute();
 			con.close();
 			//output = "Updated successfully";
-			String newPatient = readPatient();
+			String newPatient = readPatients();
 			 output = "{\"status\":\"success\", \"data\": \"" +
 			 newPatient + "\"}"; 
 		} catch (Exception e) {
@@ -159,9 +163,9 @@ public class Patient {
 			preparedStmt.execute();
 			con.close();
 			//output = "Deleted successfully";
-			String newItems = readPatient();
+			String newPatients = readPatients();
 			 output = "{\"status\":\"success\", \"data\": \"" +
-			 newItems + "\"}"; 
+					 newPatients + "\"}"; 
 		} catch (Exception e) {
 			//output = "Error while deleting the patient.";
 			output = "{\"status\":\"error\", \"data\": \"Error while deleting the patient.\"}"; 

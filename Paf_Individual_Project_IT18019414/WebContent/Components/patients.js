@@ -8,6 +8,7 @@ $(document).ready(function()
 //SAVE ============================================
 $(document).on("click", "#btnSave", function(event)
 {
+	
 	// Clear alerts---------------------
 	$("#alertSuccess").text("");
 	$("#alertSuccess").hide();
@@ -26,9 +27,9 @@ $(document).on("click", "#btnSave", function(event)
 
 	// If valid-------------------------
 	
-	//$("#formItem").submit();
+	//$("#formPatient").submit();
 	
-	var type = ($("#hidPaientIDSave").val() == "") ? "POST" : "PUT";
+	var type = ($("#hidPatientIDSave").val() == "") ? "POST" : "PUT";
 	
 	$.ajax(
 			{
@@ -52,7 +53,7 @@ function onPatientSaveComplete(response, status) {
 				$("#alertSuccess").text("Successfully saved.");
 				$("#alertSuccess").show();
 				
-				$("#divPatientGrid").html(resultSet.data);
+				$("#divPatientsGrid").html(resultSet.data);
 				}else if (resultSet.status.trim() == "error")
 					{
 					$("#alertError").text(resultSet.data);
@@ -110,7 +111,7 @@ function onPatientDeleteComplete(response, status) {
 				$("#alertSuccess").text("Successfully Delete.");
 				$("#alertSuccess").show();
 				
-				$("#divPatientGrid").html(resultSet.data);
+				$("#divPatientsGrid").html(resultSet.data);
 				}else if (resultSet.status.trim() == "error")
 					{
 					$("#alertError").text(resultSet.data);
@@ -133,40 +134,40 @@ function onPatientDeleteComplete(response, status) {
 }
 
 //CLIENT-MODEL================================================================
-function validateItemForm()
+function validatePatientForm()
 {
 	// CODE
-	if ($("#itemCode").val().trim() == "")
+	if ($("#patientName").val().trim() == "")
 	{
-		return "Insert Item Code.";
+		return "Insert Patient Name";
 	}
 	
 	// NAME
-	if ($("#itemName").val().trim() == "")
+	if ($("#patientAddress").val().trim() == "")
 	{
-		return "Insert Item Name.";
+		return "Insert Patient Address.";
 	}
 
 	// PRICE-------------------------------
-	if ($("#itemPrice").val().trim() == "")
+	if ($("#patientPhone").val().trim() == "")
 	{
-		return "Insert Item Price.";
+		return "Insert Patient Phone.";
 	}
 
 	// is numerical value
-	var tmpPrice = $("#itemPrice").val().trim();
-	if (!$.isNumeric(tmpPrice))
+	var tmpno = $("#patientPhone").val().trim();
+	if (!$.isNumeric(tmpno))
 	{
-		return "Insert a numerical value for Item Price.";
+		return "Insert a numerical value for Patient Phone.";
 	}	
 
 	// convert to decimal price
-	$("#itemPrice").val(parseFloat(tmpPrice).toFixed(2));
+	$("#patientPhone").val(tmpno);
 
 	// DESCRIPTION------------------------
-	if ($("#itemDesc").val().trim() == "")
+	if ($("#patientNIC").val().trim() == "")
 	{
-		return "Insert Item Description.";
+		return "Insert Patient NIC.";
 	}
 	return true;
 	}
