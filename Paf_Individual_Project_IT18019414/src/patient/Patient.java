@@ -36,11 +36,11 @@ public class Patient {
 			}
 			// Prepare the html table to be displayed
 			output = "<table border='1'><tr><th>Patient Name</th> <th>Patient Address</th><th>Patient Phone</th>" 
-			+ "<th>Patient NIC</th> <th>Update</th><th>Remove</th></tr>";
+			+ "<th>Patient NIC</th> <th>Update</th><th>Delete</th></tr>";
 			
 			String query = "select * from patient";
-			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(query);
 	 
 			// iterate through the rows in the result set
 			while (rs.next())
@@ -58,7 +58,7 @@ public class Patient {
 				output += "<td>" + patientNIC + "</td>";
 	
 				// buttons
-				output += "<td><input name='btnUpdate' type='button'value='Update' class='btnUpdate btn btn-secondary'></td><td><input name='btnRemove' type='button'value='Remove'class='btnRemove btn btn-danger' data-patientid='"
+				output += "<td><input name='btnUpdate' type='button'value='Update' class='btnUpdate btn btn-secondary'></td><td><input name='btnRemove' type='button'value='Delete'class='btnRemove btn btn-danger' data-patientid='"
 						+ patientID + "'>" + "</td></tr>";
 			}
 	 
@@ -86,19 +86,19 @@ public class Patient {
 			// create a prepared statement
 			String query = " insert into patient(`patientID`,`patientName`,`patientAddress`,`patientPhone`,`patientNIC`)"
 					+ " values (?, ?, ?, ?, ?)";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
+			PreparedStatement preparedS = con.prepareStatement(query);
 			// binding values
 			
-			  preparedStmt.setInt(1, 0); 
-			  preparedStmt.setString(2, name);
-			  preparedStmt.setString(3, address); 
-			  preparedStmt.setInt(4,Integer.parseInt(phone)); 
-			  preparedStmt.setString(5, NIC);
+			preparedS.setInt(1, 0); 
+			preparedS.setString(2, name);
+			preparedS.setString(3, address); 
+			preparedS.setInt(4,Integer.parseInt(phone)); 
+			  preparedS.setString(5, NIC);
 			 
 			
 			
 			// execute the statement
-			preparedStmt.execute();
+			  preparedS.execute();
 			con.close();
 			
 			//output = "Inserted successfully";
@@ -125,15 +125,15 @@ public class Patient {
 			}
 			// create a prepared statement
 			String query = "UPDATE patient SET patientName=?,patientAddress=?,patientPhone=?,patientNIC=? WHERE patientID=?";
-			PreparedStatement preparedStmt = con.prepareStatement(query);
+			PreparedStatement preparedS = con.prepareStatement(query);
 			// binding values
-			preparedStmt.setString(1, name);
-			preparedStmt.setString(2, address);
-			preparedStmt.setInt(3, Integer.parseInt(phone));
-			preparedStmt.setString(4, NIC);
-			preparedStmt.setInt(5, Integer.parseInt(ID));
+			preparedS.setString(1, name);
+			preparedS.setString(2, address);
+			preparedS.setInt(3, Integer.parseInt(phone));
+			preparedS.setString(4, NIC);
+			preparedS.setInt(5, Integer.parseInt(ID));
 			// execute the statement
-			preparedStmt.execute();
+			preparedS.execute();
 			con.close();
 			//output = "Updated successfully";
 			String newPatient = readPatients();

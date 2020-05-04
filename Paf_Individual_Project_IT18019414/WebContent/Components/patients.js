@@ -5,17 +5,17 @@ $(document).ready(function()
 	$("#alertError").hide();
 });
 
-//SAVE ============================================
+//save
 $(document).on("click", "#btnSave", function(event)
 {
 	
-	// Clear alerts---------------------
+	// Clear alerts
 	$("#alertSuccess").text("");
 	$("#alertSuccess").hide();
 	$("#alertError").text("");
 	$("#alertError").hide(); 
 	
-	//Form validation-------------------
+	//Form validation
 	var status = validatePatientForm();
 	if (status != true)
 	{
@@ -25,7 +25,7 @@ $(document).on("click", "#btnSave", function(event)
 	}
 	
 
-	// If valid-------------------------
+	// If valid
 	
 	//$("#formPatient").submit();
 	
@@ -75,7 +75,7 @@ function onPatientSaveComplete(response, status) {
 	
 }
 
-//UPDATE==========================================
+//update
 $(document).on("click", ".btnUpdate", function(event)
 {
 	$("#hidPatientIDSave").val($(this).closest("tr").find('#hidPatientIDUpdate').val());
@@ -85,7 +85,7 @@ $(document).on("click", ".btnUpdate", function(event)
 	$("#patientNIC").val($(this).closest("tr").find('td:eq(3)').text());
 });
 
-// REMOVE=========================================================
+// delete
 $(document).on("click", ".btnRemove", function(event)
 		{
 			$.ajax(
@@ -133,22 +133,22 @@ function onPatientDeleteComplete(response, status) {
 	
 }
 
-//CLIENT-MODEL================================================================
+//CLIENT-MODEL
 function validatePatientForm()
 {
-	// CODE
+	// Name
 	if ($("#patientName").val().trim() == "")
 	{
 		return "Insert Patient Name";
 	}
 	
-	// NAME
+	// Address
 	if ($("#patientAddress").val().trim() == "")
 	{
 		return "Insert Patient Address.";
 	}
 
-	// PRICE-------------------------------
+	// Phone
 	if ($("#patientPhone").val().trim() == "")
 	{
 		return "Insert Patient Phone.";
@@ -164,7 +164,7 @@ function validatePatientForm()
 	// convert to decimal price
 	$("#patientPhone").val(tmpno);
 
-	// DESCRIPTION------------------------
+	//NIC
 	if ($("#patientNIC").val().trim() == "")
 	{
 		return "Insert Patient NIC.";
